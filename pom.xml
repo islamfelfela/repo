@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.adaptavist.pom</groupId>
+        <artifactId>scriptrunner-jira-standard</artifactId>
+        <version>31</version>
+        <relativePath />
+    </parent>
+    <groupId>com.elm.scriptrunner</groupId>
+    <artifactId>quack</artifactId>
+    <version>0.23</version>
+    <organization>
+        <name>ELM</name>
+        <url>http://www.elm.sa/</url>
+    </organization>
+    <name>Quack</name>
+    <description>Plugin that adds Elm libraries to JIRA instance</description>
+    <packaging>atlassian-plugin</packaging>
+    <dependencies>
+        <!--        <dependency>-->
+        <!--            <groupId>com.atlassian.jira</groupId>-->
+        <!--            <artifactId>jira-api</artifactId>-->
+        <!--            <version>${jira.version}</version>-->
+        <!--            <scope>provided</scope>-->
+        <!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>com.atlassian.jira</groupId>-->
+        <!--            <artifactId>jira-core</artifactId>-->
+        <!--            <version>${jira.version}</version>-->
+        <!--            <scope>provided</scope>-->
+        <!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>org.codehaus.groovy.modules.http-builder</groupId>-->
+        <!--            <artifactId>http-builder</artifactId>-->
+        <!--            <version>0.7.1</version>-->
+        <!--            <scope>provided</scope>-->
+        <!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>com.atlassian.plugin</groupId>-->
+        <!--            <artifactId>atlassian-spring-scanner-annotation</artifactId>-->
+        <!--            <version>${atlassian.spring.scanner.version}</version>-->
+        <!--            <scope>provided</scope>-->
+        <!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>javax.inject</groupId>-->
+        <!--            <artifactId>javax.inject</artifactId>-->
+        <!--            <version>1</version>-->
+        <!--            <scope>provided</scope>-->
+        <!--        </dependency>-->
+        <dependency>
+            <groupId>org.apache.felix</groupId>
+            <artifactId>org.apache.felix.framework</artifactId>
+            <version>7.0.5</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-beans</artifactId>
+            <version>5.3.23</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>5.3.23</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.onresolve.jira.groovy</groupId>
+            <artifactId>groovyrunner</artifactId>
+            <version>${scriptrunner.version}</version>
+            <scope>provided</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.onresolve.scriptrunner.platform</groupId>
+                    <artifactId>scriptrunner-test-libraries-jira</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>jndi</groupId>
+                    <artifactId>jndi</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>jta</groupId>
+                    <artifactId>jta</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>is.origo.jira</groupId>
+                    <artifactId>tempo-plugin</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.tempoplugin</groupId>
+                    <artifactId>tempo-core</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>groovyrunner</groupId>
+                    <artifactId>test</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.atlassian.plugin.automation</groupId>
+                    <artifactId>automation-api</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>com.konghq</groupId>
+            <artifactId>unirest-java</artifactId>
+            <version>3.14.1</version>
+            <scope>compile</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>commons-codec</groupId>
+                    <artifactId>commons-codec</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>commons-logging</groupId>
+                    <artifactId>commons-logging</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>com.atlassian.plugins</groupId>
+            <artifactId>atlassian-plugins-osgi-javaconfig</artifactId>
+            <version>0.3.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.codehaus.groovy.modules.http-builder</groupId>
+            <artifactId>http-builder</artifactId>
+            <version>0.7.1</version>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+    <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <excludes>
+                    <exclude>com/elm/scriptrunner/manualscripts/*</exclude>
+                    <exclude>com/elm/scriptrunner/adaptavist/columns/*</exclude>
+                    <exclude>com/cloud/*</exclude>
+                    <exclude>com/elm/scriptrunner/MyWork/*</exclude>
+                </excludes>
+                <filtering>false</filtering>
+            </resource>
+        </resources>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.gmavenplus</groupId>
+                <artifactId>gmavenplus-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>com.atlassian.maven.plugins</groupId>
+                <artifactId>jira-maven-plugin</artifactId>
+                <configuration>
+                    <applications>
+                        <application>
+                            <applicationKey>jira-software</applicationKey>
+                            <version>${jira.software.application.version}</version>
+                        </application>
+                    </applications>
+                    <instructions>
+                        <Atlassian-Plugin-Key>${atlassian.plugin.key}</Atlassian-Plugin-Key>
+                        <Import-Package>
+                            org.springframework.osgi.*;resolution:="optional",
+                            org.eclipse.gemini.blueprint.*;resolution:="optional",
+                            *
+                        </Import-Package>
+                        <Export-Package>
+                        </Export-Package>
+                        <Spring-Context>*</Spring-Context>
+                    </instructions>
+                    <skipManifestValidation>true</skipManifestValidation>
+                </configuration>
+            </plugin>
+        </plugins>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>com.atlassian.maven.plugins</groupId>
+                    <artifactId>jira-maven-plugin</artifactId>
+                    <configuration>
+                        <jvmArgs>-Xmx2g</jvmArgs>
+                    </configuration>
+                </plugin>
+                <!--                <plugin>-->
+                <!--                    <groupId>com.atlassian.plugin</groupId>-->
+                <!--                    <artifactId>atlassian-spring-scanner-maven-plugin</artifactId>-->
+                <!--                    <version>${atlassian.spring.scanner.version}</version>-->
+                <!--                    <executions>-->
+                <!--                        <execution>-->
+                <!--                            <goals>-->
+                <!--                                <goal>atlassian-spring-scanner</goal>-->
+                <!--                            </goals>-->
+                <!--                            <phase>process-classes</phase>-->
+                <!--                        </execution>-->
+                <!--                    </executions>-->
+                <!--                    <configuration>-->
+                <!--                        <verbose>false</verbose>-->
+                <!--                        <scannedDependencies>-->
+                <!--                            <dependency>-->
+                <!--                                <groupId>com.atlassian.plugin</groupId>-->
+                <!--                                <artifactId>atlassian-spring-scanner-test-example-external-jar</artifactId>-->
+                <!--                            </dependency>-->
+                <!--                        </scannedDependencies>-->
+                <!--                    </configuration>-->
+                <!--                </plugin>-->
+            </plugins>
+        </pluginManagement>
+    </build>
+    <properties>
+        <jira.version>9.3.1</jira.version>
+<!--        <jira.data.version>8.14.1</jira.data.version>-->
+        <jira.software.application.version>9.3.1</jira.software.application.version>
+        <atlassian.plugin.key>${project.groupId}.${project.artifactId}</atlassian.plugin.key>
+        <amps.version>8.1.2</amps.version>
+        <scriptrunner.version>7.0.0</scriptrunner.version>
+        <atlassian.spring.scanner.version>2.2.0</atlassian.spring.scanner.version>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <enforcer.skip>true</enforcer.skip>
+
+    </properties>
+    <!--    <scm>-->
+    <!--        <developerConnection>scm:git:ssh://git@bitbucket.org/Adaptavist/jira-sw-col-headers.git</developerConnection>-->
+    <!--        <tag>HEAD</tag>-->
+    <!--    </scm>-->
+    <repositories>
+        <!-- This is required to find the parent pom and ScriptRunner dependencies -->
+        <repository>
+            <id>adaptavist-external</id>
+            <url>https://nexus.adaptavist.com/content/repositories/external</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+            <releases>
+                <enabled>true</enabled>
+                <checksumPolicy>fail</checksumPolicy>
+            </releases>
+        </repository>
+    </repositories>
+
+
+</project>

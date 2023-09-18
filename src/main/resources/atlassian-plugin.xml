@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<atlassian-plugin key="${atlassian.plugin.key}" name="${project.name}" plugins-version="2"> 
+  <plugin-info> 
+    <description>${project.description}</description>  
+    <version>${project.version}</version>  
+    <vendor name="${project.organization.name}" url="${project.organization.url}"/>  
+    <param name="plugin-icon">images/pluginIcon.png</param>  
+    <param name="plugin-logo">images/pluginLogo.png</param> 
+  </plugin-info>
+
+<!--  <web-resource key="boardColumnHeader" name="boardColumnHeader"> -->
+<!--    <resource type="download" name="boardColumnHeader.js" location="js/boardColumnHeader.js"/>  -->
+<!--    <context>gh-rapid-work</context> -->
+<!--  </web-resource>-->
+
+  <web-item key="my_jira_support_link" name="Link on My JIRA Support Main Section" section="system.top.navigation.bar" weight="60"> 
+    <label>Service Request</label>  
+    <link linkId="my_jira_support_link">https://jira.elm.sa/servicedesk/customer/portal/1</link> 
+  </web-item>
+
+<!--  <web-item name="move-it-to-trash"  key="move-it-to-trash" section="jira.issue.tools" weight="10">-->
+<!--    <label>Move to Trash</label>-->
+<!--    <conditions type="AND">-->
+<!--      <condition class="com.atlassian.jira.plugin.webfragment.conditions.IsIssueReportedByCurrentUserCondition"/>-->
+<!--      <condition class="com.atlassian.jira.plugin.webfragment.conditions.IsIssueUnresolvedCondition"/>-->
+<!--    </conditions>-->
+<!--    <link linkId="addTobeDeletedLabel">/rest/scriptrunner/latest/custom/addTobeDeletedLabel?issueId=${issue.id}</link>-->
+<!--  </web-item>-->
+
+  <web-item name="restart-jenkins"  key="restart-jenkins" section="jira.issue.tools" weight="20">
+    <label>Restart Jenkins</label>
+    <condition class="com.elm.scriptrunner.CdxIntegration.Conditions.RestartJenkinsConditionClass"/>
+    <link linkId="restartJenkins">/rest/scriptrunner/latest/custom/restartJenkinsFailedStage?issueKey=${issue.key}</link>
+<!--    <resource type="download" name="restartJenkins.js" location="/js/restartJenkins.js"/>-->
+  </web-item>
+
+  <web-resource key="trigger-javascript-from-web-item-resources" name="trigger-javascript-from-web-item Web Resources">
+    <dependency>com.atlassian.auiplugin:ajs</dependency>
+    <dependency>com.atlassian.auiplugin:aui-flag</dependency> <!-- from https://docs.atlassian.com/aui/5.7.48/docs/flag.html -->
+    <resource type="download" name="moveToTrash.js" location="/js/moveToTrash.js"/>
+    <resource type="download" name="restartJenkins.js" location="/js/restartJenkins.js"/>
+    <context>jira.view.issue</context>
+  </web-resource>
+
+
+
+
+
+</atlassian-plugin>

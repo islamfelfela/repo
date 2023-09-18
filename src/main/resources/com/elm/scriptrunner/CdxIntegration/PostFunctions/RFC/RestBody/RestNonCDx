@@ -1,0 +1,44 @@
+{
+  "Change": {
+    "AcceptanceSucessCriteria": [
+      "As Per Release Note"
+    ],
+    "ChangeImpact": [
+      "As Per Release Note"
+    ],
+    "elm.chm.down.start"       :"2021-10-18T13:30:00+03:00" ,
+    "elm.chm.down.end"         : "2021-10-18T13:30:00+03:00",
+    "Classification": "Production",
+    "ElmChmQaRiskIssues": "No",
+    "ElmChmQaRiskIssuesDesc": "NA",
+    "Service": "Yakeen",
+    "elm.chm.srv.dis.name": "Yakeen",
+    "elm.service.environment": "cdx",
+    "elmchmbusinessunit": "Technology",
+    "elmchmoutage": "Yes",
+    "elmchmkmtransfer": "No",
+    "elmjiraid": "CDXL-47",
+    "elm.chm.qa.new.release.no": "r55",
+    "description.structure": {
+      "Description": "Description125555",
+      "BackoutMethod": "Please visit Release Note Page: https://wiki.elm.sa/display/CDXL/r55",
+      "ImplementationPlan": "Please visit Release Note Page: https://wiki.elm.sa/display/CDXL/r55"
+    },
+    "header": {
+      "Category": "Elm Release",
+      "Phase": "Change Approval",
+      "ChangeCoordinator": "Ahmed Owaid Aldughmani",
+      "Subcategory": "Service Enhancement",
+      "InitiatedBy": "Mohamed Adel Mojahed",
+      "PlannedStart": "2021-10-15T18:30:00+03:00",
+      "PlannedEnd": "2021-10-15T18:30:00+03:00",
+      "Status": "initial",
+      "Title": "Zawil Demo r55"
+    },
+    "middle":{
+        "assets": [
+        "OC_Zawil"
+        ]
+    }
+  }
+}

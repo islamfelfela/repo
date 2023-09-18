@@ -1,0 +1,135 @@
+# ScriptRunner JIRA plugin descriptor
+!descriptor
+
+#restConfigItems:
+#- FIELD_INLINE_SCRIPT: ''
+#  FIELD_NOTES: columnHeaders
+#  FIELD_SCRIPT_FILE: com/elm/scriptrunner/adaptavist/columns/SumBoardColumns.groovy
+#  canned-script: com.onresolve.scriptrunner.canned.common.rest.CustomRestEndpoint
+#  !descriptor
+
+fragmentConfigItems:
+#  - '@class': com.onresolve.scriptrunner.canned.common.fragments.model.CustomRawXmlDescriptorCommand
+#    id: dda83a69-98c8-4900-b8ef-0dd785d8b33d
+#    version: 17
+#    ownedBy: null
+#    disabled: false
+#    name: null
+#    FIELD_NOTES: Atlassian Support Menu Items
+#    canned-script: com.onresolve.scriptrunner.canned.common.fragments.CustomRawXmlDescriptorScript
+#    FIELD_XML_FRAGMENT: "<web-item key=\"my_jira_support_link\" name=\"Link on My JIRA\
+#    \ Support Main Section\" section=\"system.top.navigation.bar\" weight=\"60\">\n\
+#    \t<label>Service Request</label>\n\t<link linkId=\"my_jira_support_link\">https://jira.elm.sa/servicedesk/customer/portal/1</link>\n\
+#    </web-item>"
+#  - '@class': com.onresolve.scriptrunner.fragments.model.CustomWebItemCommand
+#    id: 631d05d7-5f5c-4a3f-9333-d25d8b39191d
+#    version: 19
+#    ownedBy: null
+#    disabled: false
+#    name: null
+#    FIELD_NOTES: Move Issue To Trash Project
+#    canned-script: com.onresolve.scriptrunner.canned.jira.fragments.CustomWebItem
+#    FIELD_KEY: move-to-trash
+#    FIELD_WEIGHT: 10
+#    FIELD_SECTION: jira.issue.tools
+#    FIELD_MENU_LABEL: Move To Trash
+#    FIELD_MENU_LABEL_KEY: null
+#    FIELD_LINK_CONDITION:
+#      script: user.username == issue.reporter?.username && issue.status?.name == 'Open'
+#      scriptPath: null
+#      parameters: {}
+#    FIELD_LINK_DESTINATION: https://jira.elm.sa/rest/scriptrunner/latest/custom/addTobeDeletedLabel?issueId=${issue.id}
+#    FIELD_STYLE_CLASS: null
+#    FIELD_DO_WHAT: RUN_CODE_SHOW_FLAG
+
+
+restConfigItems:
+  - id: 04bc79c5-b608-4ae1-9856-ce1f914cd334
+    version: 36
+    ownedBy: null
+    disabled: false
+    FIELD_SCRIPT_FILE: com/elm/scriptrunner/CdxIntegration/RestEndPoint/getReleaseServiceList.groovy
+    FIELD_NOTES: ' Components List for Cdx'
+    canned-script: com.onresolve.scriptrunner.canned.common.rest.CustomRestEndpoint
+
+  - id: 0859cbb1-cd62-474c-9ba1-6c31fbd6a7f6
+    version: 17
+    ownedBy: null
+    disabled: false
+    FIELD_SCRIPT_FILE: com/elm/scriptrunner/CdxIntegration/RestEndPoint/moveIssueToTrashByAddingLabel.groovy
+    FIELD_NOTES: MoveIssueToTrash
+    canned-script: com.onresolve.scriptrunner.canned.common.rest.CustomRestEndpoint
+
+  - id: 814f0772-45df-41cc-86b9-682366f6f10b
+    version: 11
+    ownedBy: null
+    disabled: false
+    FIELD_SCRIPT_FILE: com/elm/scriptrunner/CdxIntegration/RestEndPoint/getProjectList.groovy
+    FIELD_NOTES: getProjectList
+    canned-script: com.onresolve.scriptrunner.canned.common.rest.CustomRestEndpoint
+
+
+  - FIELD_SCRIPT_FILE: com/elm/scriptrunner/CdxIntegration/RestEndPoint/restartJenkinsFailedStage.groovy
+    FIELD_NOTES: restartJenkinsFailedStage
+    canned-script: com.onresolve.scriptrunner.canned.common.rest.CustomRestEndpoint
+
+scriptListeners:
+  - FIELD_LISTENER_NOTES: Create Release Note Page
+    projects:
+      - ''
+    events:
+      - com.atlassian.jira.event.project.VersionCreateEvent
+    FIELD_INLINE_SCRIPT: ''
+    canned-script: com.onresolve.scriptrunner.canned.jira.workflow.listeners.CustomListener
+    id: 9494c0fe-bbb3-42c6-a5bd-c4c414338dda
+    version: 12
+    FIELD_FUNCTION_ID: 97072196826893f0ab1f7b92998fdf3610b1e08f
+    friendlyEventNames: VersionCreateEvent
+    name: Custom listener
+    clazz: com/elm/scriptrunner/listeners/CreateConfluencePageFromTemplate.groovy
+    disabled: false
+    '@class': com.onresolve.scriptrunner.canned.jira.workflow.listeners.model.CustomListenerCommand
+    FIELD_NOTES: null
+    FIELD_SCRIPT_FILE_OR_SCRIPT:
+      script: null
+      scriptPath: com/elm/scriptrunner/listeners/CreateConfluencePageFromTemplate.groovy
+      parameters: {}
+  - FIELD_LISTENER_NOTES: Update Release Note Page
+    projects:
+      - ''
+    events:
+      - com.atlassian.jira.event.project.VersionUpdatedEvent
+    FIELD_INLINE_SCRIPT: ''
+    canned-script: com.onresolve.scriptrunner.canned.jira.workflow.listeners.CustomListener
+    id: 4c59d3c9-c76e-4378-bcbf-e592d3285281
+    version: 18
+    FIELD_FUNCTION_ID: 7e5ebb389d9deb2244da0a38932d3e85d84b4826
+    friendlyEventNames: VersionUpdatedEvent
+    name: Custom listener
+    clazz: com/elm/scriptrunner/listeners/UpdateConfluencePageTitle.groovy
+    disabled: false
+    '@class': com.onresolve.scriptrunner.canned.jira.workflow.listeners.model.CustomListenerCommand
+    FIELD_NOTES: null
+    FIELD_SCRIPT_FILE_OR_SCRIPT:
+      script: null
+      scriptPath: com/elm/scriptrunner/listeners/UpdateConfluencePageTitle.groovy
+      parameters: {}
+
+  - FIELD_LISTENER_NOTES: Create Change once fix version is created
+    projects:
+      - CDXI
+      - CDXL
+    events:
+      - com.atlassian.jira.event.project.VersionCreateEvent
+    FIELD_SCRIPT_FILE_OR_SCRIPT:
+      script: null
+      scriptPath: com/elm/scriptrunner/CdxIntegration/Listeners/ChangeCreateVersionListener.groovy
+      parameters: {}
+    canned-script: com.onresolve.scriptrunner.canned.jira.workflow.listeners.CustomListener
+    '@class': com.onresolve.scriptrunner.canned.jira.workflow.listeners.model.CustomListenerCommand
+    id: 27448f25-9c6f-4da4-9ca3-9b275d9f566d
+    version: 10
+    FIELD_NOTES: null
+    FIELD_FUNCTION_ID: 89de1d1e-1dbd-4df2-a85c-518f1a94f491
+    friendlyEventNames: VersionCreateEvent
+    name: Custom listener
